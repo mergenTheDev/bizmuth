@@ -4,7 +4,7 @@ import "runtime"
 import "github.com/go-gl/glfw/v3.3/glfw"
 import "github.com/go-gl/gl/v3.3-core/gl"
 
-func Init() {
+func init() {
 	runtime.LockOSThread()
 }
 
