@@ -1,8 +1,11 @@
 package main
 
-import "runtime"
-import "github.com/go-gl/glfw/v3.3/glfw"
-import "github.com/go-gl/gl/v3.3-core/gl"
+import (
+	"runtime"
+
+	"github.com/go-gl/gl/v3.3-core/gl"
+	"github.com/go-gl/glfw/v3.3/glfw"
+)
 
 func init() {
 	runtime.LockOSThread()
@@ -29,7 +32,7 @@ func main() {
 
 	window.MakeContextCurrent()
 
-	gl.ClearColor(0.5, 0.1, 0.6, 1.0)
+	gl.ClearColor(0.0, 0.0, 0.0, 1.0)
 
 	for !window.ShouldClose() {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
