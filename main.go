@@ -11,12 +11,22 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func main() {
-	err := glfw.Init()
+var vertices = []float32{
+	0.0, 0.5, 0.0,
+	-0.5, -0.5, 0.0,
+	0.5, -0.5, 0.0,
+}
 
-	if err != nil {
+func main() {
+	if err := glfw.Init(); err != nil {
 		panic(err)
 	}
+
+	glfw.WindowHint(glfw.Resizable, glfw.False)
+	glfw.WindowHint(glfw.ContextVersionMajor, 3)
+	glfw.WindowHint(glfw.ContextVersionMinor, 3)
+	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
+	glfw.WindowHint(glfw.OpenGLForwardCompatible, glfw.True)
 
 	defer glfw.Terminate()
 
@@ -31,11 +41,11 @@ func main() {
 	}
 
 	window.MakeContextCurrent()
+	gl.Viewport(0, 0, 800, 600)
 
 	gl.ClearColor(0.0, 0.0, 0.0, 1.0)
 
 	for !window.ShouldClose() {
-		gl.Clear(gl.COLOR_BUFFER_BIT)
 		window.SwapBuffers()
 		glfw.PollEvents()
 	}
