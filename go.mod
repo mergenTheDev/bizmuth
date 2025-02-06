@@ -1,6 +1,6 @@
-module bizmuth.com/m
+module github.com/mergenTheDev/bizmuth
 
-go 1.22
+go 1.22.2
 
 require (
 	github.com/go-gl/gl v0.0.0-20231021071112-07e5d0ea2e71 // indirect
