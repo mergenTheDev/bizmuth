@@ -16,6 +16,7 @@ func main() {
 
 ## To-Do List
 
+- [ ] GUI
 - [ ] Mobile support
 - [ ] Changing OpenGL version
 - [ ] Vulkan and OpenGLES support
