@@ -9,9 +9,13 @@ import (
 func Init() {
 	runtime.LockOSThread()
 
-	if err := glfw.Init(); err != nil {
-		panic(prefixErr + "Can't initialize GLFW!" + reset)
+	err := glfw.Init()
+
+	if err != nil {
+		panic(PrefixErr + "Can't initialize GLFW!")
 	}
+
+	//defer glfw.Terminate()
 
 	glfw.WindowHint(glfw.ContextVersionMajor, 3)
 	glfw.WindowHint(glfw.ContextVersionMinor, 3)
