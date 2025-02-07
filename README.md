@@ -9,7 +9,7 @@ import "github.com/mergenTheDev/bizmuth"
 
 func main() {
    bizmuth.Init()
-   window := bizmuth.CreateWindow(800, 600, "Hello", glfw.False)
+   window := bizmuth.CreateWindow(800, 600, "Hello", bizmuth.FALSE)
    bizmuth.GameLoop(window)
 }
 ```
