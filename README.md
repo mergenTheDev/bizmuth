@@ -2,7 +2,7 @@
 A game engine written in Go.
 
 ## Basic Usage
-```
+```go
 package main
 
 import "github.com/mergenTheDev/bizmuth"
