@@ -18,4 +18,5 @@ import (
 
 func BackgroundColor(r float32, g float32, b float32, alpha float32) {
 	gl.ClearColor(r, g, b, alpha)
+	gl.Clear(gl.COLOR_BUFFER_BIT)
 }
