@@ -23,3 +23,7 @@ func Init() {
 	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
 	glfw.WindowHint(glfw.OpenGLForwardCompatible, glfw.True)
 }
+
+func End() {
+	defer glfw.Terminate()
+}
