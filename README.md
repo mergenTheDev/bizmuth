@@ -1,7 +1,7 @@
 # Bizmuth
 A game engine written in Go.
 
-#To-Do List
+## To-Do List
 
 - [ ] Mobile support
 - [ ] Changing OpenGL version
