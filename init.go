@@ -1,6 +1,7 @@
 package bizmuth
 
 import (
+	"log"
 	"runtime"
 
 	"github.com/go-gl/glfw/v3.3/glfw"
@@ -12,7 +13,7 @@ func Init() {
 	err := glfw.Init()
 
 	if err != nil {
-		panic(PrefixErr + "Can't initialize GLFW!")
+		log.Fatal(PrefixErr + "Can't initialize GLFW!")
 	}
 
 	//defer glfw.Terminate()
