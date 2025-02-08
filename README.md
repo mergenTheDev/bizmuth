@@ -8,9 +8,11 @@ package main
 import "github.com/mergenTheDev/bizmuth"
 
 func main() {
-   bizmuth.Init()
-   window := bizmuth.CreateWindow(800, 600, "Hello", bizmuth.FALSE)
-   bizmuth.GameLoop(window)
+	bizmuth.Init()
+	window := bizmuth.CreateWindow(800, 600, "Deneme", bizmuth.FALSE)
+	window.SetIcon("bizmuth.png")
+	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
+	window.Render()
 }
 ```
 
