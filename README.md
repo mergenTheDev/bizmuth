@@ -1,6 +1,8 @@
 # Bizmuth
 A game engine written in Go.
 
+# Still Under Development! Currently Does Not Work!
+
 ## Basic Usage
 ```go
 package main
