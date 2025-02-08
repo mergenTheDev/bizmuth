@@ -1,11 +1,13 @@
 package bizmuth
 
 import (
+	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/glfw/v3.3/glfw"
 )
 
-func Render(window *glfw.Window) {
+func (window *Window) Render() {
 	for !window.ShouldClose() {
+		gl.Clear(gl.COLOR_BUFFER_BIT)
 		window.SwapBuffers()
 		glfw.PollEvents()
 	}

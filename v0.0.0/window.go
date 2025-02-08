@@ -12,7 +12,11 @@ import (
 	_ "image/png"
 )
 
-func CreateWindow(width int, height int, title string, resizable int) *glfw.Window {
+type Window struct {
+	*glfw.Window
+}
+
+func CreateWindow(width int, height int, title string, resizable int) *Window {
 	glfw.WindowHint(glfw.Resizable, resizable)
 
 	window, err := glfw.CreateWindow(width, height, title, nil, nil)
@@ -27,56 +31,33 @@ func CreateWindow(width int, height int, title string, resizable int) *glfw.Wind
 		log.Fatal(PrefixErr + "Can't initialize OpenGL!")
 	}
 
-	//something useless
-
-	/*SetIcon := func() {
-		f, err := os.Open("bizmuth.png")
-
-		if err != nil {
-			panic(err)
-		}
-
-		var fi []image.Image
-		img, format, err := image.Decode(f)
-
-		if format != "png" {
-			panic(PrefixErr + "Image is not in PNG format It's a " + format)
-		}
-
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(format)
-		fi = append(fi, img)
-
-		window.SetIcon(fi)
-	}*/
-	//useless thing end here
-
 	gl.Viewport(0, 0, int32(width), int32(height))
 
-	return window
+	return &Window{window}
 }
 
-func SetIcon() {
-	f, err := os.Open("bizmuth.png")
+func (window *Window) SetIcon(path string) *Window {
+	file, err := os.Open(path)
 
 	if err != nil {
 		panic(err)
 	}
 
-	var fi []image.Image
-	img, format, err := image.Decode(f)
+	defer file.Close()
+
+	img, format, err := image.Decode(file)
 
 	if format != "png" {
-		panic(PrefixErr + "Image is not in PNG format It's a " + format)
+		fmt.Println(PrefixErr + "Image is not in PNG format It's a " + format)
 	}
 
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(format)
-	fi = append(fi, img)
 
-	//window.SetIcon(fi)
+	var icon []image.Image
+	icon = append(icon, img)
+
+	window.Window.SetIcon(icon)
+	return window
 }
