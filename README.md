@@ -1,4 +1,4 @@
-![image](bizmuth.png) # Bizmuth
+![image](bizmuth.png "Bizmuth") # Bizmuth
 A game engine written in Go.
 
 ## Basic Usage
