@@ -1,4 +1,4 @@
-![image](bizmuth.png){ width=64px, height:64px } # Bizmuth
+# Bizmuth
 A game engine written in Go.
 
 ## Basic Usage
