@@ -13,6 +13,7 @@ func main() {
 	window.SetIcon("bizmuth.png")
 	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
 	window.Render()
+	defer bizmuth.End()
 }
 ```
 
