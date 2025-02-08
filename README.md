@@ -21,6 +21,6 @@ func main() {
 
 - [ ] GUI
 - [ ] Mobile support
-- [ ] Changing OpenGL version
+- [ ] Be able to change OpenGL version
 - [ ] Vulkan and OpenGLES support
 - [ ] 3D support
