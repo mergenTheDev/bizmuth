@@ -16,8 +16,6 @@ func Init() {
 		log.Fatal(PrefixErr + "Can't initialize GLFW!")
 	}
 
-	//defer glfw.Terminate()
-
 	glfw.WindowHint(glfw.ContextVersionMajor, 3)
 	glfw.WindowHint(glfw.ContextVersionMinor, 3)
 	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
@@ -25,5 +23,5 @@ func Init() {
 }
 
 func End() {
-	defer glfw.Terminate()
+	glfw.Terminate()
 }
