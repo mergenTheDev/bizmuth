@@ -22,7 +22,7 @@ func main() {
 	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
 
 	bizmuth.GameLoop(func(){
-  
+  		//Do Something.
         })
 
 	defer bizmuth.End()
