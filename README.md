@@ -3,7 +3,7 @@ A game engine written in Go.
 
 Easy to use and lightweight.
 
-Based on go-gl/gl and go-gl/glfw.
+`Based on go-gl/gl and go-gl/glfw.`
 
 # Still Under Development! Currently Does Not Work!
 
@@ -15,16 +15,25 @@ import "github.com/mergenTheDev/bizmuth"
 
 func main() {
 	bizmuth.Init()
+
 	window := bizmuth.CreateWindow(800, 600, "Deneme", bizmuth.FALSE)
 	window.SetIcon("bizmuth.png")
+
 	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
-	window.Render()
-        bizmuth.GameLoop(func(){
-  
+
+	bizmuth.GameLoop(func(){
+  		//Do Something.
         })
+
 	defer bizmuth.End()
 }
 ```
+
+## I'm Currently Work On
+
+- [ ] Render Engine
+- [ ] Physics
+- [ ] Things that makes a game engine
 
 ## To-Do List
 
