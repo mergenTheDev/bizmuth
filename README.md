@@ -3,7 +3,7 @@ A game engine written in Go.
 
 Easy to use and lightweight.
 
-Based on go-gl/gl and go-gl/glfw.
+`Based on go-gl/gl and go-gl/glfw.`
 
 # Still Under Development! Currently Does Not Work!
 
@@ -28,6 +28,12 @@ func main() {
 	defer bizmuth.End()
 }
 ```
+
+## I'm Currently Work On
+
+- [ ] Render Engine
+- [ ] Physics
+- [ ] Things that makes a game engine
 
 ## To-Do List
 
