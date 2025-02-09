@@ -1,6 +1,5 @@
 # Bizmuth
 A game engine written in Go.
-
 Easy to use and lightweight.
 
 `Based on go-gl/gl and go-gl/glfw.`
