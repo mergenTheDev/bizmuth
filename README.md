@@ -1,6 +1,10 @@
 # Bizmuth
 A game engine written in Go.
 
+Easy to use and lightweight.
+
+Based on go-gl/gl and go-gl/glfw.
+
 # Still Under Development! Currently Does Not Work!
 
 ## Basic Usage
@@ -15,6 +19,9 @@ func main() {
 	window.SetIcon("bizmuth.png")
 	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
 	window.Render()
+        bizmuth.GameLoop(func(){
+  
+        })
 	defer bizmuth.End()
 }
 ```
