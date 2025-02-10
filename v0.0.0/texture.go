@@ -24,6 +24,7 @@ func LoadImage(path string, sampling uint32) uint32 {
 
 	defer file.Close()
 
+	//Optimize here later
 	imgInfo, format, err := image.DecodeConfig(file)
 	img, _, _ := image.Decode(file)
 	if err != nil {
