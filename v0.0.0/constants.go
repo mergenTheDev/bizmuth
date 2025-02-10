@@ -5,6 +5,8 @@ const (
 	TRUE       int    = 1
 	VERTEX     uint32 = 0x8B31
 	FRAGMENT   uint32 = 0x8B30
+	LINEAR     uint32 = 0x2601
+	NEAREST    uint32 = 0x2600
 	PrefixErr         = "\033[101m ERROR! \033[0m "
 	PrefixWarn        = "\033[43m WARNING! \033[0m "
 	PrefixInfo        = "\033[42m INFO \033[0m "
