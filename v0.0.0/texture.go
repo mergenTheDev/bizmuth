@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"image/draw"
 	_ "image/jpeg"
 	_ "image/png"
 
@@ -25,7 +26,13 @@ func LoadImage(path string, sampling uint32) uint32 {
 	defer file.Close()
 
 	imgInfo, format, err := image.DecodeConfig(file)
-	img, _, _ := image.Decode(file)
+	if err != nil {
+		log.Fatal(PrefixErr + "Can't decode image!")
+	}
+
+	file.Seek(0, 0)
+
+	img, _, err := image.Decode(file)
 	if err != nil {
 		log.Fatal(PrefixErr + "Can't decode image!")
 	}
@@ -35,10 +42,15 @@ func LoadImage(path string, sampling uint32) uint32 {
 	}
 
 	rgba := image.NewRGBA(img.Bounds())
+	if rgba == nil {
+		log.Fatal(PrefixErr + "Can't create GRBA image!")
+	}
+
+	draw.Draw(rgba, rgba.Bounds(), img, image.Point{0, 0}, draw.Src)
 
 	var texture uint32
 	gl.GenTextures(1, &texture)
-	gl.ActiveTexture(gl.TEXTURE0)
+	//gl.ActiveTexture(gl.TEXTURE0)
 	gl.BindTexture(gl.TEXTURE_2D, texture)
 
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, int32(sampling))

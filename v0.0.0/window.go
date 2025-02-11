@@ -30,6 +30,8 @@ func CreateWindow(width int, height int, title string, resizable int) *Window {
 	fmt.Println(PrefixInfo + "OpenGL version: " + gl.GoStr(gl.GetString(gl.VERSION)))
 
 	gl.Viewport(0, 0, int32(width), int32(height))
+	gl.Enable(gl.BLEND)
+	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
 	return &Window{window}
 }

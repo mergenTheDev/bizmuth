@@ -3,6 +3,7 @@ package bizmuth
 import (
 	"log"
 	"os"
+	"unsafe"
 
 	"github.com/go-gl/gl/v3.3-core/gl"
 )
@@ -26,7 +27,7 @@ func LoadShader(file string, shaderType uint32) uint32 {
 	gl.CompileShader(shader)
 
 	// Checks for errors I don't need anymore
-	/*var status int32
+	var status int32
 	gl.GetShaderiv(shader, gl.COMPILE_STATUS, &status)
 	if status == gl.FALSE {
 		var logLength int32
@@ -36,7 +37,7 @@ func LoadShader(file string, shaderType uint32) uint32 {
 		gl.GetShaderInfoLog(shader, logLength, nil, (*uint8)(unsafe.Pointer(&shaderLog[0])))
 
 		log.Fatalf(PrefixErr+" Failed to compile %v: %v", file, string(shaderLog))
-	}*/
+	}
 
 	return shader
 }
