@@ -25,7 +25,6 @@ func LoadImage(path string, sampling uint32) uint32 {
 
 	defer file.Close()
 
-	//Optimize here later
 	imgInfo, format, err := image.DecodeConfig(file)
 	if err != nil {
 		log.Fatal(PrefixErr + "Can't decode image!")
@@ -44,14 +43,15 @@ func LoadImage(path string, sampling uint32) uint32 {
 
 	rgba := image.NewRGBA(img.Bounds())
 	if rgba == nil {
-		log.Fatal(PrefixErr + "Can't create GRBA image!")
+		log.Fatal(PrefixErr + "Can't create RGBA image!")
 	}
 
 	draw.Draw(rgba, rgba.Bounds(), img, image.Point{0, 0}, draw.Src)
 
+	flipVertically(rgba)
+
 	var texture uint32
 	gl.GenTextures(1, &texture)
-	//gl.ActiveTexture(gl.TEXTURE0)
 	gl.BindTexture(gl.TEXTURE_2D, texture)
 
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, int32(sampling))
@@ -68,15 +68,15 @@ func LoadImage(path string, sampling uint32) uint32 {
 	return texture
 }
 
-/*func Preload(path string, assetType string) {
-	switch assetType {
-
-	case "texture":
-
+func flipVertically(img *image.RGBA) {
+	width := img.Bounds().Dx()
+	height := img.Bounds().Dy()
+	temp := make([]byte, width*4)
+	for y := 0; y < height/2; y++ {
+		top := img.Pix[y*img.Stride : (y+1)*img.Stride]
+		bottom := img.Pix[(height-1-y)*img.Stride : (height-y)*img.Stride]
+		copy(temp, top)
+		copy(top, bottom)
+		copy(bottom, temp)
 	}
-
-	var texture uint32
-	gl.GenTextures(1, &texture)
-	gl.BindTexture(gl.TEXTURE_2D, texture)
-
-}*/
+}
