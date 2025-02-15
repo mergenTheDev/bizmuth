@@ -1,7 +1,5 @@
 package bizmuth
 
-import "github.com/go-gl/mathgl/mgl32"
-
 var defVertexShader = `
 #version 330 core
 
@@ -16,7 +14,10 @@ void main() {
 }
 ` + "\x00"
 
-func CreateCamera(pos Vector2) {
-	projection := mgl32.Ortho2D(0, 800, 0, 800)
-	//view :=
+type Camera struct {
+	Position Vector2
+}
+
+func CreateCamera(pos Vector2, width int, height int) Camera {
+	return Camera{pos}
 }

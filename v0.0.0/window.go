@@ -36,12 +36,11 @@ func CreateWindow(width int, height int, title string, resizable int) *Window {
 	return &Window{window}
 }
 
-func (window *Window) SetIcon(path string) *Window {
+func (window *Window) SetIcon(path string) {
 	file, err := os.Open(path)
 
 	if err != nil {
 		fmt.Println(PrefixErr + "Can't open file!")
-		return nil
 	}
 
 	defer file.Close()
@@ -50,17 +49,14 @@ func (window *Window) SetIcon(path string) *Window {
 
 	if format != "png" {
 		fmt.Println(PrefixErr + "Image is not in PNG format It's a " + format)
-		return nil
 	}
 
 	if err != nil {
 		fmt.Println(PrefixErr + "Can't decode image!")
-		return nil
 	}
 
 	var icon []image.Image
 	icon = append(icon, img)
 
 	window.Window.SetIcon(icon)
-	return window
 }
