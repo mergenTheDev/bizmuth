@@ -18,6 +18,6 @@ type Camera struct {
 	Position Vector2
 }
 
-func CreateCamera(pos Vector2, width int, height int) Camera {
-	return Camera{pos}
+func CreateCamera(pos Vector2, width int, height int) {
+
 }
