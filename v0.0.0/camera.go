@@ -25,7 +25,7 @@ void main() {
 
 type Camera struct {
 	Position Vector2
-	Program uint32
+	Program  uint32
 }
 
 func CreateCamera(x, y float32) *Camera {
@@ -33,11 +33,15 @@ func CreateCamera(x, y float32) *Camera {
 
 	return &Camera{
 		Position: Vector2{x, y},
-		Program: program,
+		Program:  program,
 	}
 }
 
-func (cam *Camera) 
+func (cam *Camera) UpdateCamera() {
+	gl.UseProgram(cam.Program)
+
+	//TO-DO
+}
 
 func cameraShader(vertex string, fragment string) uint32 {
 	vertexShader := gl.CreateShader(gl.VERTEX_SHADER)
