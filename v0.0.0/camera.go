@@ -2,7 +2,7 @@ package bizmuth
 
 import "github.com/go-gl/gl/v3.3-core/gl"
 
-var defCameraVertexShader = `
+var defVertexShader = `
 #version 330 core
 
 layout (location = 0) in vec3 aPos;
@@ -29,7 +29,7 @@ type Camera struct {
 }
 
 func CreateCamera(x, y float32) *Camera {
-	program := cameraShader(defCameraVertexShader, emptyFragmentShader)
+	program := cameraProgram(defVertexShader, emptyFragmentShader)
 
 	return &Camera{
 		Position: Vector2{x, y},
@@ -43,7 +43,7 @@ func (cam *Camera) UpdateCamera() {
 	//TO-DO
 }
 
-func cameraShader(vertex string, fragment string) uint32 {
+func cameraProgram(vertex string, fragment string) uint32 {
 	vertexShader := gl.CreateShader(gl.VERTEX_SHADER)
 	fragmentShader := gl.CreateShader(gl.FRAGMENT_SHADER)
 
