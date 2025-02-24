@@ -26,8 +26,6 @@ func Init() {
 	if err := gl.Init(); err != nil {
 		log.Fatal(PrefixErr + "Can't initialize OpenGL!")
 	}
-
-	//fmt.Printf(PrefixInfo+"OpenGL version: %v", gl.GoStr(gl.GetString(gl.VERSION)))
 }
 
 func End() {

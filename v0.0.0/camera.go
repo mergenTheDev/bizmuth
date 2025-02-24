@@ -18,20 +18,26 @@ void main() {
 
 var emptyFragmentShader = `
 #version 330 core
-void main() {}` + "\x00"
+out vec4 FragColor;
+void main() {
+	FragColor = vec4(1.0);
+}` + "\x00"
 
 type Camera struct {
 	Position Vector2
+	Program uint32
 }
 
 func CreateCamera(x, y float32) *Camera {
 	program := cameraShader(defCameraVertexShader, emptyFragmentShader)
-	gl.UseProgram(program)
 
 	return &Camera{
 		Position: Vector2{x, y},
+		Program: program,
 	}
 }
+
+func (cam *Camera) 
 
 func cameraShader(vertex string, fragment string) uint32 {
 	vertexShader := gl.CreateShader(gl.VERTEX_SHADER)
@@ -58,8 +64,6 @@ func cameraShader(vertex string, fragment string) uint32 {
 	gl.DetachShader(program, fragmentShader)
 	gl.DeleteShader(vertexShader)
 	gl.DeleteShader(fragmentShader)
-
-	//Note: No need error checking. Function is private.
 
 	return program
 }
