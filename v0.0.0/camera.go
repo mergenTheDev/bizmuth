@@ -24,7 +24,7 @@ void main() {
 }
 `
 
-var emptyFragmentShader = `
+var defFragmentShader = `
 #version 330 core
 
 out vec4 FragColor;
@@ -51,7 +51,7 @@ type Camera struct {
 func CreateCamera(x, y float32) (*Camera, uint32) {
 	initCameraOnce.Do(func() {
 		vertexShader := compileShader(defVertexShader, gl.VERTEX_SHADER)
-		fragmentShader := compileShader(emptyFragmentShader, gl.FRAGMENT_SHADER)
+		fragmentShader := compileShader(defFragmentShader, gl.FRAGMENT_SHADER)
 
 		program = gl.CreateProgram()
 
