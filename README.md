@@ -21,7 +21,10 @@ func main() {
 
 	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
 
+	camera := bizmuth.CreateCamera(0, 0)
+
 	bizmuth.GameLoop(func(){
+		camera.Update()
   		//Do Something.
         })
 
@@ -29,16 +32,16 @@ func main() {
 }
 ```
 
-## I'm Currently Work On
-
-- [ ] Render Engine
-- [ ] Physics
-- [ ] Things that makes a game engine
-
 ## To-Do List
 
-- [ ] GUI
+- [ ] Physics
+- [ ] Lights and Shadows
+- [ ] Normal Textures
+- [ ] Controller Support
+
+## Future To-Do
+
+- [ ] GUI (Maybe)
 - [ ] Mobile support
-- [ ] Be able to change OpenGL version
 - [ ] Vulkan and OpenGLES support
-- [ ] 3D support
+- [ ] 3D
