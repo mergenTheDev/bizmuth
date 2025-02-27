@@ -4,6 +4,7 @@ import (
 	"sync"
 
 	"github.com/go-gl/gl/v3.3-core/gl"
+	"github.com/go-gl/glfw/v3.3/glfw"
 	"github.com/go-gl/mathgl/mgl32"
 )
 
@@ -68,12 +69,16 @@ func CreateCamera(x, y float32) (*Camera, uint32) {
 
 	return &Camera{
 		Position:   Vector2{X: x, Y: y},
-		projection: mgl32.Ortho2D(0, 800, 800, 0),
+		projection: mgl32.Ortho2D(0, float32(windowWidth), float32(windowHeight), 0),
 	}, program
 }
 
 func (cam *Camera) Update() {
 	gl.UseProgram(program)
+
+	windowWidth, windowHeight = glfw.GetCurrentContext().GetSize()
+	cam.projection = mgl32.Ortho2D(0, float32(windowWidth), float32(windowHeight), 0)
+	gl.Viewport(0, 0, int32(windowWidth), int32(windowHeight))
 
 	gl.UniformMatrix4fv(projectionLoc, 1, false, &cam.projection[0])
 

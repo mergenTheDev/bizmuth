@@ -70,6 +70,7 @@ func flipVertically(img *image.RGBA) {
 	width := img.Bounds().Dx()
 	height := img.Bounds().Dy()
 	temp := make([]byte, width*4)
+
 	for y := 0; y < height/2; y++ {
 		top := img.Pix[y*img.Stride : (y+1)*img.Stride]
 		bottom := img.Pix[(height-1-y)*img.Stride : (height-y)*img.Stride]
