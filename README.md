@@ -32,16 +32,16 @@ func main() {
 }
 ```
 
-## I'm Currently Work On
-
-- [ ] Render Engine
-- [ ] Physics
-- [ ] Things that makes a game engine
-
 ## To-Do List
 
-- [ ] GUI
+- [ ] Physics
+- [ ] Lights and Shadows
+- [ ] Normal Textures
+- [ ] Controller Support
+
+## Future To-Do
+
+- [ ] GUI (Maybe)
 - [ ] Mobile support
-- [ ] Be able to change OpenGL version
 - [ ] Vulkan and OpenGLES support
-- [ ] 3D support
+- [ ] 3D
