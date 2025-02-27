@@ -21,7 +21,10 @@ func main() {
 
 	bizmuth.BackgroundColor(0.5, 0.1, 0.6, 1.0)
 
+	camera := bizmuth.CreateCamera(0, 0)
+
 	bizmuth.GameLoop(func(){
+		camera.Update()
   		//Do Something.
         })
 
