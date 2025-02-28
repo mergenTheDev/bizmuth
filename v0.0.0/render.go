@@ -22,7 +22,7 @@ type DrawArgs struct {
 	CollisionShape int32
 }
 
-func genObjects(vertices []float32, indices []float32) Objects {
+func genObjects(vertices []float32, indices []uint32) Objects {
 	var vbo, vao, ebo uint32
 
 	gl.GenVertexArrays(1, &vao)
@@ -65,7 +65,7 @@ func Draw(args DrawArgs) DrawArgs {
 		-50, 50, 0, 0, 1,
 	}
 
-	indices := []float32{
+	indices := []uint32{
 		0, 1, 3,
 		1, 2, 3,
 	}
