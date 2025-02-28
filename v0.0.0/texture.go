@@ -63,6 +63,9 @@ func LoadImage(path string, sampling uint32) uint32 {
 	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, int32(imgInfo.Width), int32(imgInfo.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, gl.Ptr(rgba.Pix))
 	gl.GenerateMipmap(gl.TEXTURE_2D)
 
+	gl.BindTexture(gl.TEXTURE_2D, texture)
+	gl.Uniform1i(gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00")), 0)
+
 	return texture
 }
 

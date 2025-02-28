@@ -14,13 +14,14 @@ var defVertexShader = `
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 aTexCoord;
 
+uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
 out vec2 TexCoord;
 
 void main() {
-	gl_Position = projection * view * vec4(aPos, 1.0);
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
 	TexCoord = aTexCoord;
 }
 `
@@ -38,7 +39,7 @@ void main() {
 }`
 
 var (
-	program        uint32
+	shaderProgram  uint32
 	initCameraOnce sync.Once
 	viewLoc        int32
 	projectionLoc  int32
@@ -49,19 +50,19 @@ type Camera struct {
 	projection mgl32.Mat4
 }
 
-func CreateCamera(x, y float32) (*Camera, uint32) {
+func CreateCamera(x, y float32) *Camera {
 	initCameraOnce.Do(func() {
 		vertexShader := compileShader(defVertexShader, gl.VERTEX_SHADER)
 		fragmentShader := compileShader(defFragmentShader, gl.FRAGMENT_SHADER)
 
-		program = gl.CreateProgram()
+		shaderProgram = gl.CreateProgram()
 
-		gl.AttachShader(program, vertexShader)
-		gl.AttachShader(program, fragmentShader)
-		gl.LinkProgram(program)
+		gl.AttachShader(shaderProgram, vertexShader)
+		gl.AttachShader(shaderProgram, fragmentShader)
+		gl.LinkProgram(shaderProgram)
 
-		projectionLoc = gl.GetUniformLocation(program, gl.Str("projection\x00"))
-		viewLoc = gl.GetUniformLocation(program, gl.Str("view\x00"))
+		projectionLoc = gl.GetUniformLocation(shaderProgram, gl.Str("projection\x00"))
+		viewLoc = gl.GetUniformLocation(shaderProgram, gl.Str("view\x00"))
 
 		gl.DeleteShader(vertexShader)
 		gl.DeleteShader(fragmentShader)
@@ -70,11 +71,11 @@ func CreateCamera(x, y float32) (*Camera, uint32) {
 	return &Camera{
 		Position:   Vector2{X: x, Y: y},
 		projection: mgl32.Ortho2D(0, float32(windowWidth), float32(windowHeight), 0),
-	}, program
+	}
 }
 
 func (cam *Camera) Update() {
-	gl.UseProgram(program)
+	gl.UseProgram(shaderProgram)
 
 	windowWidth, windowHeight = glfw.GetCurrentContext().GetSize()
 	cam.projection = mgl32.Ortho2D(0, float32(windowWidth), float32(windowHeight), 0)
