@@ -55,6 +55,7 @@ func BackgroundColor(r float32, g float32, b float32, alpha float32) {
 }
 
 func Draw(args DrawArgs) DrawArgs {
+	gl.UseProgram(shaderProgram)
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
 	model := mgl32.Translate3D(args.Pos.X, args.Pos.Y, 0)
 
@@ -76,6 +77,11 @@ func Draw(args DrawArgs) DrawArgs {
 	gl.DrawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, gl.PtrOffset(0))
 
 	gl.UniformMatrix4fv(modelLoc, 1, false, &model[0])
+
+	if args.Texture != 0 {
+		gl.ActiveTexture(gl.TEXTURE0)
+		gl.BindTexture(gl.TEXTURE_2D, args.Texture)
+	}
 
 	return DrawArgs{}
 }
