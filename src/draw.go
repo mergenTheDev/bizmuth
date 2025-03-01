@@ -54,7 +54,7 @@ func genObjects(vertices []float32, indices []uint32) Objects {
 	}
 }
 
-func Draw(args DrawArgs) DrawArgs {
+func Draw(args DrawArgs) {
 	gl.UseProgram(shaderProgram)
 
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
@@ -85,8 +85,4 @@ func Draw(args DrawArgs) DrawArgs {
 	gl.BindVertexArray(obj.VAO)
 	gl.DrawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, gl.PtrOffset(0))
 	gl.BindVertexArray(0)
-
-	return DrawArgs{
-		Position: args.Position,
-	}
 }
