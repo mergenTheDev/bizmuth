@@ -12,7 +12,7 @@ type Objects struct {
 }
 
 type DrawArgs struct {
-	Pos            Vector2
+	Position       Vector2
 	Texture        uint32
 	Scale          float32
 	Text           string
@@ -20,6 +20,10 @@ type DrawArgs struct {
 	Physics        int32
 	Body           int32
 	CollisionShape int32
+}
+
+func BackgroundColor(r float32, g float32, b float32, alpha float32) {
+	gl.ClearColor(r, g, b, alpha)
 }
 
 func genObjects(vertices []float32, indices []uint32) Objects {
@@ -50,15 +54,11 @@ func genObjects(vertices []float32, indices []uint32) Objects {
 	}
 }
 
-func BackgroundColor(r float32, g float32, b float32, alpha float32) {
-	gl.ClearColor(r, g, b, alpha)
-}
-
 func Draw(args DrawArgs) DrawArgs {
 	gl.UseProgram(shaderProgram)
 
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
-	model := mgl32.Translate3D(args.Pos.X, args.Pos.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
+	model := mgl32.Translate3D(args.Position.X, args.Position.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
 
 	vertices := []float32{
 		50, 50, 0, 1, 1,
@@ -87,6 +87,6 @@ func Draw(args DrawArgs) DrawArgs {
 	gl.BindVertexArray(0)
 
 	return DrawArgs{
-		Pos: args.Pos,
+		Position: args.Position,
 	}
 }
