@@ -26,7 +26,24 @@ func BackgroundColor(r float32, g float32, b float32, alpha float32) {
 	gl.ClearColor(r, g, b, alpha)
 }
 
-func genObjects(vertices []float32, indices []uint32) Objects {
+func Draw(args DrawArgs) {
+	gl.UseProgram(shaderProgram)
+
+	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
+	model := mgl32.Translate3D(args.Position.X, args.Position.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
+
+	vertices := []float32{
+		50, 50, 0, 1, 1,
+		50, -50, 0, 1, 0,
+		-50, -50, 0, 0, 0,
+		-50, 50, 0, 0, 1,
+	}
+
+	indices := []uint32{
+		0, 1, 3,
+		1, 2, 3,
+	}
+
 	var vbo, vao, ebo uint32
 
 	gl.GenVertexArrays(1, &vao)
@@ -47,33 +64,6 @@ func genObjects(vertices []float32, indices []uint32) Objects {
 	gl.VertexAttribPointer(1, 2, gl.FLOAT, false, 5*4, gl.PtrOffset(3*4))
 	gl.EnableVertexAttribArray(1)
 
-	return Objects{
-		VAO: vao,
-		VBO: vbo,
-		EBO: ebo,
-	}
-}
-
-func Draw(args DrawArgs) {
-	gl.UseProgram(shaderProgram)
-
-	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
-	model := mgl32.Translate3D(args.Position.X, args.Position.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
-
-	vertices := []float32{
-		50, 50, 0, 1, 1,
-		50, -50, 0, 1, 0,
-		-50, -50, 0, 0, 0,
-		-50, 50, 0, 0, 1,
-	}
-
-	indices := []uint32{
-		0, 1, 3,
-		1, 2, 3,
-	}
-
-	obj := genObjects(vertices, indices)
-
 	gl.UniformMatrix4fv(modelLoc, 1, false, &model[0])
 
 	if args.Texture != 0 {
@@ -82,7 +72,7 @@ func Draw(args DrawArgs) {
 		gl.Uniform1i(gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00")), 0)
 	}
 
-	gl.BindVertexArray(obj.VAO)
+	gl.BindVertexArray(vao)
 	gl.DrawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, gl.PtrOffset(0))
 	gl.BindVertexArray(0)
 }
