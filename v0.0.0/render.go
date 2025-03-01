@@ -1,7 +1,7 @@
 package bizmuth
 
 import (
-	"sync"
+	"log"
 
 	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/mathgl/mgl32"
@@ -23,8 +23,6 @@ type DrawArgs struct {
 	Body           int32
 	CollisionShape int32
 }
-
-var genBufferOnce sync.Once
 
 func genObjects(vertices []float32, indices []uint32) Objects {
 	var vbo, vao, ebo uint32
@@ -61,36 +59,40 @@ func BackgroundColor(r float32, g float32, b float32, alpha float32) {
 func Draw(args DrawArgs) {
 	gl.UseProgram(shaderProgram)
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
-	//model := mgl32.Translate3D(args.Pos.X, args.Pos.Y, 0)
+	if modelLoc == -1 {
+		log.Println("Warning: 'model' uniform not found in shader program")
+	}
 	model := mgl32.Translate3D(args.Pos.X, args.Pos.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
 
 	var obj Objects
 
-	genBufferOnce.Do(func() {
-		vertices := []float32{
-			50, 50, 0, 1, 1,
-			50, -50, 0, 1, 0,
-			-50, -50, 0, 0, 0,
-			-50, 50, 0, 0, 1,
-		}
+	vertices := []float32{
+		50, 50, 0, 1, 1,
+		50, -50, 0, 1, 0,
+		-50, -50, 0, 0, 0,
+		-50, 50, 0, 0, 1,
+	}
 
-		indices := []uint32{
-			0, 1, 3,
-			1, 2, 3,
-		}
+	indices := []uint32{
+		0, 1, 3,
+		1, 2, 3,
+	}
 
-		obj = genObjects(vertices, indices)
-	})
+	obj = genObjects(vertices, indices)
 
 	gl.UniformMatrix4fv(modelLoc, 1, false, &model[0])
 
 	if args.Texture != 0 {
 		gl.ActiveTexture(gl.TEXTURE0)
 		gl.BindTexture(gl.TEXTURE_2D, args.Texture)
-		gl.Uniform1i(gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00")), 0)
+		textureLoc := gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00"))
+		if textureLoc == -1 {
+			log.Println("Warning: 'Texture' uniform not found in shader program")
+		}
+		gl.Uniform1i(textureLoc, 0)
 	}
 
 	gl.BindVertexArray(obj.VAO)
 	gl.DrawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, gl.PtrOffset(0))
-	gl.BindVertexArray(0)
+	//gl.BindVertexArray(0)
 }

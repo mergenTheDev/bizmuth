@@ -48,8 +48,6 @@ func LoadImage(path string, sampling uint32) uint32 {
 
 	draw.Draw(rgba, rgba.Bounds(), img, image.Point{0, 0}, draw.Src)
 
-	flipVertically(rgba)
-
 	var texture uint32
 	gl.GenTextures(1, &texture)
 	gl.BindTexture(gl.TEXTURE_2D, texture)
@@ -63,22 +61,5 @@ func LoadImage(path string, sampling uint32) uint32 {
 	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, int32(imgInfo.Width), int32(imgInfo.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, gl.Ptr(rgba.Pix))
 	gl.GenerateMipmap(gl.TEXTURE_2D)
 
-	gl.BindTexture(gl.TEXTURE_2D, texture)
-	gl.Uniform1i(gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00")), 0)
-
 	return texture
-}
-
-func flipVertically(img *image.RGBA) {
-	width := img.Bounds().Dx()
-	height := img.Bounds().Dy()
-	temp := make([]byte, width*4)
-
-	for y := 0; y < height/2; y++ {
-		top := img.Pix[y*img.Stride : (y+1)*img.Stride]
-		bottom := img.Pix[(height-1-y)*img.Stride : (height-y)*img.Stride]
-		copy(temp, top)
-		copy(top, bottom)
-		copy(bottom, temp)
-	}
 }
