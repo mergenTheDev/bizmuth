@@ -5,12 +5,6 @@ import (
 	"github.com/go-gl/mathgl/mgl32"
 )
 
-type Objects struct {
-	VAO uint32
-	VBO uint32
-	EBO uint32
-}
-
 type DrawArgs struct {
 	Position       Vector2
 	Texture        uint32
