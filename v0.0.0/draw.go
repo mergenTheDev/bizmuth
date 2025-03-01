@@ -1,8 +1,6 @@
 package bizmuth
 
 import (
-	"log"
-
 	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/mathgl/mgl32"
 )
@@ -58,10 +56,8 @@ func BackgroundColor(r float32, g float32, b float32, alpha float32) {
 
 func Draw(args DrawArgs) DrawArgs {
 	gl.UseProgram(shaderProgram)
+
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
-	if modelLoc == -1 {
-		log.Println("Warning: 'model' uniform not found in shader program")
-	}
 	model := mgl32.Translate3D(args.Pos.X, args.Pos.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
 
 	vertices := []float32{
@@ -83,11 +79,7 @@ func Draw(args DrawArgs) DrawArgs {
 	if args.Texture != 0 {
 		gl.ActiveTexture(gl.TEXTURE0)
 		gl.BindTexture(gl.TEXTURE_2D, args.Texture)
-		textureLoc := gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00"))
-		if textureLoc == -1 {
-			log.Println("Warning: 'Texture' uniform not found in shader program")
-		}
-		gl.Uniform1i(textureLoc, 0)
+		gl.Uniform1i(gl.GetUniformLocation(shaderProgram, gl.Str("Texture\x00")), 0)
 	}
 
 	gl.BindVertexArray(obj.VAO)
