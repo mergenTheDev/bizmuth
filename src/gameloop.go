@@ -7,7 +7,8 @@ import (
 
 func (window *Window) GameLoop(callback func()) {
 	for !window.ShouldClose() {
-		gl.Clear(gl.COLOR_BUFFER_BIT)
+		gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+		gl.UseProgram(shaderProgram)
 		callback()
 		window.SwapBuffers()
 		glfw.PollEvents()

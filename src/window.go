@@ -39,7 +39,9 @@ func CreateWindow(width int32, height int32, title string, resizable int) *Windo
 
 	gl.Viewport(0, 0, width, height)
 	gl.Enable(gl.BLEND)
+	gl.Enable(gl.DEPTH_TEST)
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+	gl.DepthFunc(gl.LESS)
 
 	return &Window{window}
 }
