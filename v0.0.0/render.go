@@ -56,15 +56,13 @@ func BackgroundColor(r float32, g float32, b float32, alpha float32) {
 	gl.ClearColor(r, g, b, alpha)
 }
 
-func Draw(args DrawArgs) {
+func Draw(args DrawArgs) DrawArgs {
 	gl.UseProgram(shaderProgram)
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
 	if modelLoc == -1 {
 		log.Println("Warning: 'model' uniform not found in shader program")
 	}
 	model := mgl32.Translate3D(args.Pos.X, args.Pos.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
-
-	var obj Objects
 
 	vertices := []float32{
 		50, 50, 0, 1, 1,
@@ -78,7 +76,7 @@ func Draw(args DrawArgs) {
 		1, 2, 3,
 	}
 
-	obj = genObjects(vertices, indices)
+	obj := genObjects(vertices, indices)
 
 	gl.UniformMatrix4fv(modelLoc, 1, false, &model[0])
 
@@ -94,5 +92,9 @@ func Draw(args DrawArgs) {
 
 	gl.BindVertexArray(obj.VAO)
 	gl.DrawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, gl.PtrOffset(0))
-	//gl.BindVertexArray(0)
+	gl.BindVertexArray(0)
+
+	return DrawArgs{
+		Pos: args.Pos,
+	}
 }
