@@ -17,10 +17,10 @@ type Window struct {
 	*glfw.Window
 }
 
-var (
+/*var (
 	windowWidth  int
 	windowHeight int
-)
+)*/
 
 func CreateWindow(width int32, height int32, title string, resizable int) *Window {
 	glfw.WindowHint(glfw.Resizable, resizable)
@@ -33,7 +33,7 @@ func CreateWindow(width int32, height int32, title string, resizable int) *Windo
 
 	window.MakeContextCurrent()
 
-	windowWidth, windowHeight = window.GetSize()
+	//windowWidth, windowHeight = window.GetSize()
 
 	fmt.Println(PrefixInfo + "OpenGL version: " + gl.GoStr(gl.GetString(gl.VERSION)))
 
