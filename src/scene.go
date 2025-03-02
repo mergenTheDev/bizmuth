@@ -1,5 +1,18 @@
 package bizmuth
 
-func CreateScene(name string) {}
+type SceneInterface interface {
+	Ready()
+}
 
-func SwithcScene(scene int) {}
+type Scene struct{}
+
+func (def Scene) Ready(callback func()) {
+	callback()
+}
+
+
+
+// Swithes and Runs Scene
+func SwithcScene(scene Scene) {
+	
+}

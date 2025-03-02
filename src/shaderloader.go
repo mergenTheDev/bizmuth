@@ -7,6 +7,7 @@ import (
 	"github.com/go-gl/gl/v3.3-core/gl"
 )
 
+// Probably useless
 func LoadShader(file string, shaderType uint32) uint32 {
 	buffer, err := os.ReadFile(file)
 
