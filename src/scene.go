@@ -15,7 +15,9 @@ func (scene Scene) Ready(callback func()) {
 
 func (window *Window) Input(callback func()) {
 	go func() {
-		callback()
+		for {
+			callback()
+		}
 	}()
 }
 
