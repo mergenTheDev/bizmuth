@@ -1,27 +1,26 @@
 package bizmuth
 
-type SceneInterface interface {
-	Ready()
-	Update()
-}
-
 type Scene struct{}
 
-var CurrentScene Scene
+var CurrentScene *Scene
 
-func (scene Scene) Ready(callback func()) {
-	callback()
+func CreateScene() *Scene {
+	var scene Scene
+	return &scene
 }
 
-func (window *Window) Input(callback func()) {
-	go func() {
-		for {
-			callback()
-		}
-	}()
+// Swithes and Runs Scene
+func SwithcScene(scene *Scene) {
+	CurrentScene = scene
 }
 
-func (scene Scene) Update(callback func()) {
+func (scene *Scene) Ready(callback func()) {
+	if callback != nil {
+		callback()
+	}
+}
+
+func (scene *Scene) Update(callback func()) {
 	go func() {
 		for {
 			callback()
@@ -30,9 +29,4 @@ func (scene Scene) Update(callback func()) {
 			}
 		}
 	}()
-}
-
-// Swithes and Runs Scene
-func SwithcScene(scene Scene) {
-	CurrentScene = scene
 }

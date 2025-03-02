@@ -43,6 +43,16 @@ const (
 	KeySuper = 91
 )
 
+// Checks for user inputs in another Goroutine
+func (window *Window) Input(callback func()) {
+	go func() {
+		for !window.ShouldClose() {
+			callback()
+			glfw.PollEvents()
+		}
+	}()
+}
+
 //Should call inside of window.Input()
 
 func (window *Window) OnKeyPress(key glfw.Key, callback func()) {
