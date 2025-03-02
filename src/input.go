@@ -43,7 +43,7 @@ const (
 	KeySuper = 91
 )
 
-//Should call inside of bizmuth.GameLoop()
+//Should call inside of window.Input()
 
 func (window *Window) OnKeyPress(key glfw.Key, callback func()) {
 	if window.GetKey(key) == glfw.Press {

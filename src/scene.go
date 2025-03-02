@@ -11,7 +11,12 @@ var CurrentScene Scene
 
 func (scene Scene) Ready(callback func()) {
 	callback()
+}
 
+func (window *Window) Input(callback func()) {
+	go func() {
+		callback()
+	}()
 }
 
 func (scene Scene) Update(callback func()) {
