@@ -17,11 +17,6 @@ type Window struct {
 	*glfw.Window
 }
 
-/*var (
-	windowWidth  int
-	windowHeight int
-)*/
-
 func CreateWindow(width int32, height int32, title string, resizable int) *Window {
 	glfw.WindowHint(glfw.Resizable, resizable)
 
