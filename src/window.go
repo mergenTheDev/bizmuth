@@ -17,10 +17,13 @@ type Window struct {
 	*glfw.Window
 }
 
+var CurrentContext *glfw.Window
+
 func CreateWindow(width int32, height int32, title string, resizable int) *Window {
 	glfw.WindowHint(glfw.Resizable, resizable)
 
 	window, err := glfw.CreateWindow(int(width), int(height), title, nil, nil)
+	CurrentContext = window
 
 	if err != nil {
 		log.Fatal(PrefixErr + "Can't create window!")

@@ -26,12 +26,12 @@ func (scene *Scene) Ready(callback func()) {
 }
 
 func (scene *Scene) Update(callback func()) {
-	for !glfw.GetCurrentContext().ShouldClose() && CurrentScene == scene {
+	for !CurrentContext.ShouldClose() && CurrentScene == scene {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
 		gl.UseProgram(shaderProgram)
 		//fmt.Println(shaderProgram)
 		callback()
-		glfw.GetCurrentContext().SwapBuffers()
+		CurrentContext.SwapBuffers()
 		glfw.PollEvents()
 	}
 }
