@@ -2,14 +2,13 @@ package bizmuth
 
 import (
 	"log"
-	"runtime"
 
 	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/glfw/v3.3/glfw"
 )
 
 func Init() {
-	runtime.LockOSThread()
+	//runtime.LockOSThread()
 
 	err := glfw.Init()
 
