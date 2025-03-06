@@ -51,6 +51,7 @@ func (window *Window) Input(callback func()) {
 			glfw.PollEvents()
 		}
 	}()
+	wg.Wait()
 }
 
 //Should call inside of window.Input()

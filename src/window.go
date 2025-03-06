@@ -5,6 +5,7 @@ import (
 	"image"
 	"log"
 	"os"
+	"runtime"
 
 	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/glfw/v3.3/glfw"
@@ -33,11 +34,17 @@ func CreateWindow(width int32, height int32, title string, resizable int) *Windo
 
 	//windowWidth, windowHeight = window.GetSize()
 
-	fmt.Println(PrefixInfo + "OpenGL version: " + gl.GoStr(gl.GetString(gl.VERSION)))
-
 	gl.Viewport(0, 0, width, height)
 	gl.Enable(gl.BLEND)
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+
+	var versionMajor, versionMinor int32
+	gl.GetIntegerv(gl.MAJOR_VERSION, &versionMajor)
+	gl.GetIntegerv(gl.MINOR_VERSION, &versionMinor)
+
+	fmt.Println(PrefixInfo+"GPU Vendor:", gl.GoStr(gl.GetString(gl.VENDOR)))
+	fmt.Printf(PrefixInfo+"OpenGL Version: %v.%v\n", versionMajor, versionMinor)
+	fmt.Println(PrefixInfo+"Number of CPU Threads:", runtime.NumCPU())
 
 	return &Window{window}
 }
