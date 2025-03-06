@@ -20,16 +20,14 @@ func SwithcScene(scene *Scene) {
 }
 
 func (scene *Scene) Ready(callback func()) {
-	if callback != nil {
-		callback()
-	}
+	callback()
 }
 
+// Optimize in future.
 func (scene *Scene) Update(callback func()) {
 	for !CurrentContext.ShouldClose() && CurrentScene == scene {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
 		gl.UseProgram(shaderProgram)
-		//fmt.Println(shaderProgram)
 		callback()
 		CurrentContext.SwapBuffers()
 		glfw.PollEvents()
