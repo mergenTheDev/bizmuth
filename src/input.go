@@ -1,6 +1,10 @@
 package bizmuth
 
-import "github.com/go-gl/glfw/v3.3/glfw"
+import (
+	"time"
+
+	"github.com/go-gl/glfw/v3.3/glfw"
+)
 
 const (
 	KeySpace = 32
@@ -49,9 +53,9 @@ func (window *Window) Input(callback func()) {
 		for !window.ShouldClose() {
 			callback()
 			glfw.PollEvents()
+			time.Sleep(16 * time.Millisecond)
 		}
 	}()
-	wg.Wait()
 }
 
 //Should call inside of window.Input()
