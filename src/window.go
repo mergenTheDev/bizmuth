@@ -34,6 +34,7 @@ func CreateWindow(width int32, height int32, title string, resizable int) *Windo
 
 	//windowWidth, windowHeight = window.GetSize()
 
+	glfw.SwapInterval(0)
 	gl.Viewport(0, 0, width, height)
 	gl.Enable(gl.BLEND)
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)

@@ -6,6 +6,8 @@ import (
 	"github.com/go-gl/glfw/v3.3/glfw"
 )
 
+var InputInterval time.Duration = 16
+
 const (
 	KeySpace = 32
 	Key0     = 48
@@ -47,13 +49,17 @@ const (
 	KeySuper = 91
 )
 
+func SetInputInterval(interval time.Duration) {
+	InputInterval = interval
+}
+
 // Checks for user inputs in another Goroutine
 func (window *Window) Input(callback func()) {
 	go func() {
 		for !window.ShouldClose() {
 			callback()
 			glfw.PollEvents()
-			time.Sleep(16 * time.Millisecond)
+			time.Sleep(InputInterval * time.Millisecond)
 		}
 	}()
 }
