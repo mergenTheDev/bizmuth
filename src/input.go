@@ -6,7 +6,7 @@ import (
 	"github.com/go-gl/glfw/v3.3/glfw"
 )
 
-var InputInterval time.Duration = 16
+var InputInterval time.Duration = 1000 / 60
 
 const (
 	KeySpace = 32
@@ -49,8 +49,8 @@ const (
 	KeySuper = 91
 )
 
-func SetInputInterval(interval time.Duration) {
-	InputInterval = interval
+func SetInputInterval(fps time.Duration) {
+	InputInterval = 1000 / fps
 }
 
 // Checks for user inputs in another Goroutine
