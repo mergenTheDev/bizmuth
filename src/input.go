@@ -64,8 +64,7 @@ func (window *Window) Input(callback func()) {
 	}()
 }
 
-//Should call inside of window.Input()
-
+// Should call inside of window.Input()
 func (window *Window) OnKeyPress(key glfw.Key, callback func()) {
 	if window.GetKey(key) == glfw.Press {
 		callback()
