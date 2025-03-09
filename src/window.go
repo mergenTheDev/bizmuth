@@ -32,8 +32,6 @@ func CreateWindow(width int32, height int32, title string, resizable int) *Windo
 
 	window.MakeContextCurrent()
 
-	//windowWidth, windowHeight = window.GetSize()
-
 	glfw.SwapInterval(0)
 
 	gl.Viewport(0, 0, width, height)
