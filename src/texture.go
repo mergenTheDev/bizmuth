@@ -10,7 +10,6 @@ import (
 	_ "image/png"
 
 	"github.com/go-gl/gl/v3.3-core/gl"
-	//_ "image/gif"
 )
 
 type Image struct {
