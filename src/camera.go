@@ -39,14 +39,14 @@ func CreateCamera(x, y float32) *Camera {
 
 	return &Camera{
 		Position:   Vector2{X: x, Y: y},
-		projection: mgl32.Ortho2D(0, 800, 600, 0),
+		projection: mgl32.Ortho2D(-400, 400, 300, -300),
 	}
 }
 
 func (cam *Camera) Update() {
 	gl.UseProgram(shaderProgram)
 
-	cam.projection = mgl32.Ortho2D(0, 800, 600, 0)
+	cam.projection = mgl32.Ortho2D(-400, 400, 300, -300)
 	//gl.Viewport(0, 0, int32(windowWidth), int32(windowHeight))
 
 	gl.UniformMatrix4fv(projectionLoc, 1, false, &cam.projection[0])
