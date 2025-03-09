@@ -14,9 +14,7 @@ func init() {
 }
 
 func Init() {
-	err := glfw.Init()
-
-	if err != nil {
+	if err := glfw.Init(); err != nil {
 		log.Fatal(PrefixErr + "Can't initialize GLFW!")
 	}
 
