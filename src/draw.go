@@ -29,14 +29,14 @@ func Draw(args DrawArgs) {
 	gl.UseProgram(shaderProgram)
 
 	modelLoc := gl.GetUniformLocation(shaderProgram, gl.Str("model\x00"))
-	model := mgl32.Translate3D(args.Position.X, args.Position.Y, 0).Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
+	model := mgl32.Translate3D(args.Position.X, args.Position.Y, 0) //.Mul4(mgl32.Scale3D(args.Scale, args.Scale, 1))
 
 	genBuffersOnce.Do(func() {
 		vertices := []float32{
-			50, 50, 0, 1, 1,
-			50, -50, 0, 1, 0,
-			-50, -50, 0, 0, 0,
-			-50, 50, 0, 0, 1,
+			200, 200, 0, 1, 1,
+			200, -200, 0, 1, 0,
+			-200, -200, 0, 0, 0,
+			-200, 200, 0, 0, 1,
 		}
 
 		indices := []uint32{

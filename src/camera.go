@@ -47,11 +47,9 @@ func (cam *Camera) Update() {
 	gl.UseProgram(shaderProgram)
 
 	cam.projection = mgl32.Ortho2D(-400, 400, 300, -300)
-	//gl.Viewport(0, 0, int32(windowWidth), int32(windowHeight))
-
 	gl.UniformMatrix4fv(projectionLoc, 1, false, &cam.projection[0])
 
-	view := mgl32.Translate3D(-cam.Position.X, cam.Position.Y, 0)
+	view := mgl32.Translate3D(-cam.Position.X, -cam.Position.Y, 0)
 	gl.UniformMatrix4fv(viewLoc, 1, false, &view[0])
 }
 
