@@ -1,6 +1,7 @@
 package bizmuth
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/go-gl/glfw/v3.3/glfw"
@@ -50,7 +51,15 @@ const (
 )
 
 func SetInputInterval(fps time.Duration) {
-	InputInterval = 1000 / fps
+	if fps > 1000 {
+		fmt.Println(PrefixWarn + "Checking for inputs over 1000 per second isn't recommended setting to 1000")
+		InputInterval = 1
+	} else if fps < 1 {
+		fmt.Println(PrefixWarn + "Checking for inputs under 1 per second isn't recommended setting to 1")
+		InputInterval = 1000
+	} else if fps <= 1000 && fps >= 1 {
+		InputInterval = 1000 / fps
+	}
 }
 
 // Checks for user inputs in another Goroutine
