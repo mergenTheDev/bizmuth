@@ -8,6 +8,12 @@ import (
 	"github.com/go-gl/glfw/v3.3/glfw"
 )
 
+type Config struct {
+	Debug bool
+	VSync bool
+	
+}
+
 func init() {
 	runtime.LockOSThread()
 	runtime.GOMAXPROCS(2)
