@@ -1,6 +1,8 @@
 # Bizmuth
 A game engine written in Go.
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/mergenTheDev/bizmuth.svg)](https://pkg.go.dev/github.com/mergenTheDev/bizmuth)
+
 Easy to use and lightweight.
 
 `Based on go-gl/gl and go-gl/glfw.`
