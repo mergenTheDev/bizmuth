@@ -11,15 +11,16 @@ import (
 type Config struct {
 	Debug bool
 	VSync bool
-	
 }
+
+var engine Config
 
 func init() {
 	runtime.LockOSThread()
 	runtime.GOMAXPROCS(2)
 }
 
-func Init() {
+func Init(config Config) {
 	if err := glfw.Init(); err != nil {
 		log.Fatal(PrefixErr + "Can't initialize GLFW!")
 	}
@@ -33,6 +34,8 @@ func Init() {
 	if err := gl.Init(); err != nil {
 		log.Fatal(PrefixErr + "Can't initialize OpenGL!")
 	}
+
+	cfg = config
 }
 
 func End() {

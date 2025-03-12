@@ -32,7 +32,11 @@ func CreateWindow(width int32, height int32, title string, resizable int) *Windo
 
 	window.MakeContextCurrent()
 
-	glfw.SwapInterval(0)
+	if engine.VSync {
+		glfw.SwapInterval(1)
+	} else {
+		glfw.SwapInterval(0)
+	}
 
 	gl.Viewport(0, 0, width, height)
 	gl.Enable(gl.BLEND)
