@@ -35,7 +35,7 @@ func Init(config Config) {
 		log.Fatal(PrefixErr + "Can't initialize OpenGL!")
 	}
 
-	cfg = config
+	engine = config
 }
 
 func End() {
