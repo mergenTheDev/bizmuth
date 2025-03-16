@@ -9,10 +9,6 @@ Easy to use and lightweight.
 
 # Still Under Development! Currently Does Not Work!
 
-![Caution]
-
-Still Under Development! Currently Does Not Work!
-
 ## Basic Usage
 ```go get -u github.com/mergenTheDev/bizmuth```
 
